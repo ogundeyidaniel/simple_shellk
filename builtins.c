@@ -1,61 +1,27 @@
- #include "shell.h"
-
+#include "shell.h"
 /**
- * check_for_builtins - checks if the command is a builtin
- * @argv: arguments
- * @env: current enviroment
- * Return: pointer to the function or NULL
+ *builtin - built-in command for shell.
+ *@tokenize: value tokenized the buffer in startsh file.
+ *@env: array of string to environ values.
+ *@buff: buffer input from main.
+ *@status: value of the exit.
  */
-
-void (*check_for_builtins(char *argv[], char *env[]))(char *env[])
+void builtin(char **tokenize, char **env, char **buff, int status)
 {
 	int i;
+	(void)buff;
 
-	builtin_t check[] = {
-		{"exit", n_exit},
-		{"env", _env},
-		{NULL, NULL}
-	};
-
-	for (i = 0; check[i].f != NULL; i++)
+	if (_strcmp(tokenize[0], "exit") == 0)
 	{
-		if (_strcmp(argv[0], check[i].name) == 0)
-			break;
+		for (i = 0; tokenize[i]; i++)
+			free(tokenize[i]);
+			free(*buff);
+			free(tokenize);
+			exit(status);
 	}
-	if (check[i].f != NULL)
+	if (_strcmp(tokenize[0], "env") == 0)
 	{
-		free_double((void **) argv, ec((void **) argv));
-		check[i].f(env);
-	}
-
-	return (check[i].f);
-}
-
-/**
-* n_exit - exit shell
-* @env: current enviroment
-*/
-
-void n_exit(char *env[])
-{
-	if (env)
-
-	exit(0);
-}
-
-/**
-* _env - prints enviroment
-* @env: current enviroment
-*/
-
-void _env(char *env[])
-{
-	int i = 0;
-
-	while (env[i])
-	{
-		_putstr(env[i]);
-		_putstr("\n");
-		i++;
+		if (!tokenize[1])
+			env_builtin(env);
 	}
 }
