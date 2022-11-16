@@ -1,44 +1,46 @@
-.TH man 1 "16 Nov 2022" "ALX" "Project 0x16"
+.TH hsh 1 "nov 16, 2022" "hsh Usage Commands Manual"
 .SH NAME
-.B msh
-- a simple implementation of a command language interpreter
+Simple_Shell - command line interpreter or shell.
 .SH SYNOPSIS
-.nf
-.BR msh...
-[command_name [args...]]
-.fi
-.PP
-[command_string [args...]] |
-.BR ./msh
+\fB ./hsh\fR
+
+\fB (no options yet)\fR
 
 .SH DESCRIPTION
-.BR msh
-as a simple implementation of a shell, reads a command from the standard input, a command
-line string, or a specified file, and if it's present, executes it.
+\fBSimpleShell()\fR writes to the standard output according to a format specifier.
 
-.SH OPERANDS
-The interpreter supports the following operands:
-.TP
-.BR "command_name"
-The string assigned to parameter zero, if
-.BR "command_name"
-is not found, the interpreter will display the correspondent error.
-.TP
-.BR arguments
-Set for the positional arguments $1, $2, and so on, if present.
+.SH OVERVIEW
 
-.SH NON-INTERACTIVE MODE
-.BR msh
-can be used in non-interactive mode for executing tasks outside the interpreter's
-environment. The command should be piped through a standard output tool, such as
-.BR "echo"(1):
+Reading from either the terminal or files, simple_shell interprets and executes commands.
 
-.TP
-.OP
-$
-.BR echo
-"ls -ltr" |
-.BR ./msh
+.RE
 
+.SH Compilation
+
+Compile simple_shell with the GNU Compiler Collection, preferably using gcc plus the below specified flags, as per this example:
+.P
+.RS
+.B $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+.P
+.RE
+simple_shell can be run by entering the below command on the command line. Note that the prompt ('$') will appear and you will then be able to enter commands.
+.P
+.RS
+.B $ ./hsh
+
+.SH BUILTINS
+
+The following builtin commands are supported:
+
+.B exit
+- Exits the shell
+
+.B env
+- List the current environment variables
+
+.SH SEE ALSO
+.B Bash(1)
+.SH BUGS
+No known bugs.
 .SH AUTHOR
 Ogundeyi Daniel
